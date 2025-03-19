@@ -18,7 +18,9 @@ const Gender = () => {
 
   return (
     <SafeAreaView className="bg-studyYellow-100 h-screen px-7">
-      <View className='mt-10'>      <ProgressBar currentStep={3} totalSteps={4}  /></View>
+      <View className='mt-10'>      
+        <ProgressBar currentStep={3} totalSteps={4}  />
+      </View>
       <View className="flex-1 mt-7">
         <Text className="text-studyBlack-300 font-semibold text-[24px] font-Raleway-Medium">
           How do you identify?

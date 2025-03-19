@@ -21,7 +21,7 @@ const role = () => {
             <View className='mt-10'>      <ProgressBar currentStep={4} totalSteps={4}  /></View>
             <View className="flex-1 mt-7">
                 <Text className="text-studyBlack-300 font-semibold text-[24px] font-Raleway-Medium">
-                    Choose a moe to get started
+                    Choose a mode to get started
                 </Text>
                 <Text className="font-Raleway-Regular  text-base">
                     StudyWith’s for making all kinds of connections! To help you excel in you studies and also learn to create value.
