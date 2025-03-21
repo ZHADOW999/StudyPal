@@ -18,12 +18,12 @@ const Signup = () => {
                         <Text className=' text-xl font-Raleway-Medium'>Welcome to</Text>
                         <Text className='font-Raleway-Medium text-5xl'>StudyPal</Text>
                         <View className='mt-20'>
-                            <TouchableOpacity onPress={() => router.push('/matric')} className='flex justify-center items-center h-16 rounded-full   text-white bg-studyBlack-300'>
+                            <TouchableOpacity onPress={() => router.push('/(auth)/sign-up/matric')} className='flex justify-center items-center h-16 rounded-full   text-white bg-studyBlack-300'>
                                 <Text className='text-white'> Create an account</Text>
 
                             </TouchableOpacity>
                             {/* <Button text='Create an account' onPress={() => router.push('/matric')} /> */}
-                            <TouchableOpacity className='flex justify-center items-center h-16 rounded-full mt-4 border border-studyBlack-300'>
+                            <TouchableOpacity onPress={()=> router.push('/(auth)/login')} className='flex justify-center items-center h-16 rounded-full mt-4 border border-studyBlack-300'>
                                 <Text className='text-studyBlack-300'> Log in</Text>
                             </TouchableOpacity>
                         </View >

@@ -22,6 +22,7 @@ module.exports = {
         "Raleway-Medium":['Raleway-Medium','sans-serif'],
         "Raleway-Regular":['Raleway-Regular','sans-serif'],
         "Raleway-Bold":['Raleway-Bold','sans-serif'],
+        "Raleway-SemiBold":['Raleway-SemiBold','sans-serif']
       }
     },
   },

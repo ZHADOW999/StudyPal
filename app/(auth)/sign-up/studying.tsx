@@ -16,9 +16,9 @@ const Studying = () => {
         <TextInput
           style={styles.shadowBox}
           placeholder='e.g Computer Science with Economics'
-          className='placeholder-shown:text-white shadow-black shadow-2xl bg-white mt-10 font-Raleway-Regular text-base pl-4 py-3 rounded-lg'
+          className=' shadow-black shadow-2xl bg-white mt-10 font-Raleway-Regular text-base pl-4 py-3 rounded-lg'
         />
-        <View className='absolute bottom-10 w-full'><Button text='Next' path={'/gender'} /></View>
+        <View className='absolute bottom-10 w-full'><Button text='Next' path={'/(auth)/sign-up/gender'} /></View>
       </View>
     </SafeAreaView>
 

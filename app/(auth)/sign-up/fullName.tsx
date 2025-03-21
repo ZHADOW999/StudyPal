@@ -25,11 +25,11 @@ const fullName = () => {
                 </Text>
                 <TextInput
                     style={styles.shadowBox}
-                    placeholder="Enter your Student ID"
+                    placeholder="Enter your Full Name"
                     className="shadow-black bg-white mt-10 font-Raleway-Regular text-base pl-4 py-3 rounded-lg"
                 />
                 <View className="absolute bottom-10 w-full">
-                    <Button text="Next" path={"/studying"} />
+                    <Button text="Next" path={"/(auth)/sign-up/studying"} />
                 </View>
             </View>
         </SafeAreaView>

@@ -32,7 +32,7 @@ const Matric = () => {
             Already have an account?
 
           </Text>
-          <TouchableOpacity className=''> 
+          <TouchableOpacity onPress={()=> router.push('/(auth)/login')} className=''> 
             <Text className='text-studyBlack-300 font-extrabold mt-3'>Sign in</Text>
             </TouchableOpacity>
         </View>
@@ -40,7 +40,7 @@ const Matric = () => {
           <Text className='text-white'> Next</Text>
         </TouchableOpacity> */}
         <View className='absolute bottom-10 w-full'>
-          <Button text={'Next'} path='/fullName' />
+          <Button text={'Next'} path='/(auth)/sign-up/fullName' />
         </View>
       </View>
     </SafeAreaView>

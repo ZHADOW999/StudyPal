@@ -57,7 +57,7 @@ const Gender = () => {
         </TouchableOpacity>
 
         <View className='absolute bottom-10 w-full'>
-          <Button text='Next' path={'/role'} />
+          <Button text='Next' path={'/(auth)/sign-up/role'} />
         </View>
       </View>
     </SafeAreaView>
