@@ -3,16 +3,21 @@ import React from 'react'
 import { Tabs } from 'expo-router'
 import icons from '@/constants/icons'
 
-export const TabIcon= ({text, icon,focused}:{text:string,icon:any, focused:boolean}) => {
+export const TabIcon= ({text, icon,focused,iconColored}:{text:string,icon:any, focused:boolean,iconColored:any}) => {
     return(
         <View className='flex-1 mt-3 flex flex-col items-center'>
-                            <Image
+                            {focused ? (<Image
+                                source={iconColored}
+                                // tintColor={focused ? '#FFD233' : undefined}
+                                resizeMode='contain'
+                                className='size-7'
+                            />): (<Image
                                 source={icon}
                                 // tintColor={focused ? '#FFD233' : undefined}
                                 resizeMode='contain'
                                 className='size-7'
-                            />
-
+                            />)
+}
                             <Text className={`${focused ? 'text-base text-studyYellow-100 font-Raleway-SemiBold' : 'text-studyBlack-300 '} text-xs w-full text-center mt-1`}>
                                 {text}
                             </Text>
@@ -41,7 +46,7 @@ const _layout = () => {
                     title: 'discover',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <TabIcon text="Discover" icon={icons.discover} focused={focused} />
+                        <TabIcon text="Discover" icon={icons.discover} focused={focused} iconColored={icons.discoverColored}/>
                     )
                 }}
             />
@@ -51,7 +56,7 @@ const _layout = () => {
                     title: 'Chat',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <TabIcon text="Chat" icon={icons.chat} focused={focused} />
+                        <TabIcon text="Chat" icon={icons.chat} focused={focused}  iconColored={icons.chatColored}/>
                     )
                 }}
             />
@@ -61,7 +66,7 @@ const _layout = () => {
                     title: 'Resources',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <TabIcon text="Resouces" icon={icons.search} focused={focused} />
+                        <TabIcon text="Resouces" icon={icons.search} focused={focused} iconColored={icons.searchColored}/>
                     )
                 }}
             />
@@ -71,7 +76,7 @@ const _layout = () => {
                     title: 'Account',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <TabIcon text="Account" icon={icons.account} focused={focused} />
+                        <TabIcon text="Account" icon={icons.account} focused={focused} iconColored={icons.accountColor}/>
                     )
                 }}
             />

@@ -24,7 +24,7 @@ export default function Index() {
 
         <View className="mt-12 ">
         <Card bgColor="#D9C7E7" header="StudyPal" text="Make friends to study with" image={images.music} imageSize= {130}/>
-        <Card bgColor="#FF9A62" header="MentorShip" text="Get into the mentorship program" image={images.mentorship} imageSize={130}/>
+        <Card bgColor="#FF9A62" header="Mentorship" text="Get into the mentorship program" image={images.mentorship} imageSize={130}/>
         <Card header="Extra class" text="Courses are being broken down to your understanding " bgColor='#85C7EE' image={images.clock} imageSize={130}/>
         </View>
       </ScrollView>
@@ -32,10 +32,3 @@ export default function Index() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 10
-  },
-
-
-})

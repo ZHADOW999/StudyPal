@@ -4,6 +4,10 @@ import chat from "@/assets/icons/chat.png";
 import search from "@/assets/icons/search.png";
 import backBtn from "@/assets/icons/backBtn.png";
 import CheckMark from "@/assets/icons/check-mark.png";
+import discoverColored from "@/assets/icons/discoverColored.png";
+import accountColor from "@/assets/icons/accountColored.png";
+import chatColored from "@/assets/icons/chatColored.png";
+import searchColored from "@/assets/icons/searchColored.png";
 
 export default {
     discover,
@@ -11,5 +15,9 @@ export default {
     chat,
     search,
     backBtn,
-    CheckMark
-}
+    CheckMark,
+    discoverColored,
+    accountColor,
+    chatColored,
+    searchColored,
+ };
