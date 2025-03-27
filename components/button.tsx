@@ -3,13 +3,12 @@ import React from 'react'
 import { useRouter } from 'expo-router'
 
 
-const Button = ({text, path}: {text: string, path: string}) => {
+const Button = ({text, onPress }: {text: string,onPress?:()=> void}) => {
     const router = useRouter();
   return (
   
         
-      <TouchableOpacity  onPress={//@ts-ignore
-        ()=> router.push(path)} className='flex justify-center items-center h-16 rounded-full   text-white bg-studyBlack-300'>
+      <TouchableOpacity onPress={onPress}  className='flex justify-center items-center h-16 rounded-full   text-white bg-studyBlack-300'>
         <Text className='text-white'>{text}</Text>
       </TouchableOpacity>
     

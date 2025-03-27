@@ -6,19 +6,26 @@ import Button from '@/components/button';
 import icons from '@/constants/icons';
 // import Icon from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import { useAuthStore } from '@/store/authStore';
+import { useRouter } from 'expo-router';
 
 const role = () => {
-    const [Role, setRole] = useState('');
-    const [RoleSelected, setRoleSelected] = useState('');
+    const { role, setRole } = useAuthStore();
+    const [error, setError] = useState<string | undefined>()
+    const router = useRouter()
 
-    const handleRoleSelect = (selectedRole: string) => {
-        setRole(selectedRole);
-        setRoleSelected(selectedRole);
-    };
+    const handleNext = () => {
+        if (!role) {
+            setError('Please select a role')
+            return
+        }
+        setError(undefined)
+        router.push('/(auth)/sign-up/privacy')
+    }
 
     return (
         <SafeAreaView className="bg-studyYellow-100 h-screen px-7">
-            <View className='mt-10'>      <ProgressBar currentStep={4} totalSteps={4}  /></View>
+            <View className='mt-10'>      <ProgressBar currentStep={4} totalSteps={4} /></View>
             <View className="flex-1 mt-7">
                 <Text className="text-studyBlack-300 font-semibold text-[24px] font-Raleway-Medium">
                     Choose a mode to get started
@@ -28,27 +35,27 @@ const role = () => {
                 </Text>
                 <TouchableOpacity
                     style={styles.shadowBox}
-                    onPress={() => handleRoleSelect('Grow')}
+                    onPress={() => setRole('Growing')}
                     className="gap-5 bg-white px-3 py-4 rounded-lg flex flex-row justify-between items-center mt-10"
                 >
                     <View>
                         <Text className='font-Raleway-Bold text-2xl'>Growing</Text>
-                        <Text className='font-Raleway-Regular'> 
-                        I need help to excel in my studies
+                        <Text className='font-Raleway-Regular'>
+                            I need help to excel in my studies
                         </Text>
                     </View>
                     <View
                         style={{ shadowRadius: 2, }}
-                        className={` ${RoleSelected === 'Grow' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
+                        className={` ${role === 'Growing' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
                             }`}
                     >
-                        {RoleSelected === 'Grow' && (<Icon className=' flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
+                        {role === 'Growing' && (<Icon className=' flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.shadowBox}
-                    onPress={() => handleRoleSelect('Elite')}
+                    onPress={() => setRole('Elite')}
                     className="gap-5 bg-white px-3 py-4 rounded-lg flex flex-row justify-between items-center mt-6"
                 >
                     <View >
@@ -57,15 +64,20 @@ const role = () => {
                     </View>
                     <View
 
-                        className={` ${RoleSelected === 'Elite' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
+                        className={` ${role === 'Elite' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
                             }`}
                     >
-                        {RoleSelected === 'Elite' && (<Icon className='flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
+                        {role === 'Elite' && (<Icon className='flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
                     </View>
                 </TouchableOpacity>
 
+                <View >
+                    <Text className='text-red-500 text-sm mt-1'> {error}</Text>
+                </View>
+
+
                 <View className='absolute bottom-10 w-full'>
-                    <Button text='Next' path={'/(auth)/sign-up/privacy'} />
+                    <Button text='Next' onPress={handleNext} />
                 </View>
             </View>
         </SafeAreaView>

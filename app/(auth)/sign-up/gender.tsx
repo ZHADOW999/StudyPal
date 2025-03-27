@@ -4,17 +4,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProgressBar from '@/components/ProgressBar';
 import Button from '@/components/button';
 import icons from '@/constants/icons';
+import { GenderType, useAuthStore } from '@/store/authStore';
+import { router, useRouter } from 'expo-router';
 // import Icon from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-const Gender = () => {
-  const [gender, setGender] = useState('');
-  const [genderSelected, setGenderSelected] = useState('');
 
-  const handleGenderSelect = (selectedGender: string) => {
-    setGender(selectedGender);
-    setGenderSelected(selectedGender);
-  };
+const Gender = () => {
+  const {gender, setGender} = useAuthStore();
+  const [error, setError] = useState('');
+
+  const handleNext = () => {
+    if (!gender) {
+      setError("Please select your gender")
+      return
+    }
+
+    router.push("/(auth)/sign-up/role")
+  }
 
   return (
     <SafeAreaView className="bg-studyYellow-100 h-screen px-7">
@@ -28,36 +35,39 @@ const Gender = () => {
 
         <TouchableOpacity
           style={styles.shadowBox}
-          onPress={() => handleGenderSelect('Male')}
+          onPress={() => setGender('Male')}
           className="gap-5 bg-white px-3 py-4 rounded-lg flex flex-row justify-between items-center mt-10"
         >
           <Text>Male</Text>
           <View
             style={{ shadowRadius: 2, }}
-            className={` ${genderSelected === 'Male' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
+            className={` ${gender === 'Male' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
               }`}
           >
-            {genderSelected === 'Male' && (<Icon className=' flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
+            {gender === 'Male' && (<Icon className=' flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.shadowBox}
-          onPress={() => handleGenderSelect('Female')}
+          onPress={() => setGender('Female')}
           className="gap-5 bg-white px-3 py-4 rounded-lg flex flex-row justify-between items-center mt-6"
         >
           <Text>Female</Text>
           <View
 
-            className={` ${genderSelected === 'Female' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center ' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
+            className={` ${gender === 'Female' ? ' bg-studyYellow-100 rounded-full size-7 flex justify-center items-center ' : 'flex bg-white justify-center items-center border-black border-2  rounded-full p-[9px]'
               }`}
           >
-            {genderSelected === 'Female' && (<Icon className='flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
+            {gender === 'Female' && (<Icon className='flex justify-center items-center' name='check' color='#ffffff' size={15} />)}
           </View>
         </TouchableOpacity>
+        <View >
+          <Text className='text-red-500 text-sm mt-1'> {error}</Text>
+        </View>
 
         <View className='absolute bottom-10 w-full'>
-          <Button text='Next' path={'/(auth)/sign-up/role'} />
+          <Button text='Next' onPress={handleNext} />
         </View>
       </View>
     </SafeAreaView>

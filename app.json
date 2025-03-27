@@ -12,18 +12,28 @@
       "supportsTablet": true
     },
     "android": {
+      "usesCleartextTraffic": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/imageDesign.png",
         "backgroundColor": "#ffffff"
+        
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/imageDesignn.png"
+      "favicon": "./assets/images/imageDesign.png"
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-build-properties",
+          {
+            "android": {
+              "usesCleartextTraffic": true
+            }
+          }
+      ],
       [
         "expo-splash-screen",
         {

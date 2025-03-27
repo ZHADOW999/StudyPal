@@ -5,12 +5,33 @@ import {
     TouchableOpacity,
     StyleSheet,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProgressBar from "@/components/ProgressBar";
 import Button from "@/components/button";
+import Input from "@/components/Input";
+import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "expo-router";
 
 const fullName = () => {
+    const router = useRouter()
+    const {fullName,setFullName} = useAuthStore()
+    const [error, setError] = useState<string | undefined>()
+
+    const validateName = (name: string) => {
+        if (!name) return "Full name is required"
+        if (name.length < 10) return "Please enter your full name"
+        return ""
+      }
+    
+      const handleNext = () => {
+        const validationError = validateName(fullName)
+        setError(validationError)
+    
+        if (!validationError) {
+          router.push('/(auth)/sign-up/studying')
+        }
+      }
     return (
         <SafeAreaView className="h-screen bg-studyYellow-100 px-7">
             <View className="mt-10">
@@ -23,13 +44,20 @@ const fullName = () => {
                 <Text className="font-Raleway-Regular  text-base">
                     Add the name you are called in school
                 </Text>
-                <TextInput
+                {/* <TextInput
                     style={styles.shadowBox}
                     placeholder="Enter your Full Name"
                     className="shadow-black bg-white mt-10 font-Raleway-Regular text-base pl-4 py-3 rounded-lg"
+                /> */}
+                <Input
+                placeholder="Enter your Full Name"
+                    keyboardType="default"
+                    value={fullName}
+                    onChangeText={setFullName}
+                    error={error}
                 />
                 <View className="absolute bottom-10 w-full">
-                    <Button text="Next" path={"/(auth)/sign-up/studying"} />
+                    <Button text="Next" onPress={handleNext} />
                 </View>
             </View>
         </SafeAreaView>
