@@ -10,7 +10,7 @@ const Signup = () => {
     const router = useRouter();
 
     return (
-        <SafeAreaView>
+        <View>
             <ScrollView>
                 <View className='bg-studyYellow-100 h-screen'>
                     <Image className='-mt-28 w-[90%] flex justify-self-end self-end' resizeMode='contain' width={100} height={100} source={images.signupImage} />
@@ -31,7 +31,7 @@ const Signup = () => {
                 </View>
 
             </ScrollView> 
-        </SafeAreaView>
+        </View>
     )
 }
 

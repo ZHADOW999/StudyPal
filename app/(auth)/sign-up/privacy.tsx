@@ -35,6 +35,7 @@ const privacy = () => {
         resetForm()
       }
     } catch (error: any) {
+      alert('User already Exists')
       console.error('Signup error details:', {
         message: error.message,
         response: error.response?.data,
@@ -52,7 +53,7 @@ const privacy = () => {
   }
 
   return (
-    <SafeAreaView className='h-screen bg-studyYellow-100'>
+    <View className='h-screen bg-studyYellow-100'>
       <View className='mt-10 flex-1 mx-7'>
         <Text className='text-2xl font-Raleway-Medium mb-10'>
           Privacy Notice
@@ -64,7 +65,7 @@ const privacy = () => {
           <Button text={loading ? "Submitting..." : "I agree"} onPress={handleSubmit} />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

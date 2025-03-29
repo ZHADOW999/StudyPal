@@ -28,7 +28,7 @@ const Studying = () => {
   }
 
   return (
-    <SafeAreaView className='h-screen bg-studyYellow-100 px-7'>
+    <View className='h-screen bg-studyYellow-100 px-7'>
       <View className='mt-10'>
         <ProgressBar currentStep={2} totalSteps={4} />
       </View>
@@ -48,7 +48,7 @@ const Studying = () => {
         />
         <View className='absolute bottom-10 w-full'><Button text='Next' onPress={handleNext} /></View>
       </View>
-    </SafeAreaView>
+    </View>
 
   )
 }

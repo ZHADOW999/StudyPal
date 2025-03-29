@@ -8,6 +8,8 @@ import discoverColored from "@/assets/icons/discoverColored.png";
 import accountColor from "@/assets/icons/accountColored.png";
 import chatColored from "@/assets/icons/chatColored.png";
 import searchColored from "@/assets/icons/searchColored.png";
+import upload from "@/assets/icons/Upload.png";
+import uploadColored from "@/assets/icons/UploadColored.png";
 
 export default {
     discover,
@@ -20,4 +22,6 @@ export default {
     accountColor,
     chatColored,
     searchColored,
+    upload,
+    uploadColored,
  };

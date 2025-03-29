@@ -14,6 +14,7 @@ interface AuthState {
   currentStep: number
   isAuthenticated: boolean
   userId: string
+  isLoading: boolean
 
   // Actions
 
@@ -28,6 +29,7 @@ interface AuthState {
   setStep: (step: number) => void
   setAuthenticated: (isAuthenticated: boolean) => void
   setUserId: (userId: string) => void
+  setIsLoading: (isLoading: boolean) => void
   resetForm: () => void
 
   // Computed
@@ -44,6 +46,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   role: null,
   currentStep: 0,
   isAuthenticated: false,
+  isLoading: false,
   userId: "",
 
   // Actions
@@ -58,6 +61,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   setStep: (step) => set({ currentStep: step }),
   setAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
   setUserId: (userId) => set({ userId }),
+  setIsLoading: (isLoading) => set({ isLoading }),
   resetForm: () =>
     set({
       matricNumber: "",

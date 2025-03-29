@@ -31,6 +31,7 @@ import { useFonts } from 'expo-font';
 import React, { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import emitter from '@/lib/NavigationEmmiter';
 
 export default function RootLayout() {
   const router = useRouter();
@@ -76,6 +77,18 @@ export default function RootLayout() {
       });
     }
   }, [isReady, isAuthenticated, segments, fontLoaded]);
+
+  useEffect(() => {
+    const handleNavigateSignUp = () => {
+      router.replace('/(auth)/sign-up/sign-up');
+    };
+
+    emitter.on('navigateSignUp', handleNavigateSignUp);
+
+    return () => {
+      emitter.off('navigateSignUp', handleNavigateSignUp);
+    };
+  }, []);
 
   if (!fontLoaded || !isReady) return null;
 

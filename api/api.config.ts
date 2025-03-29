@@ -1,7 +1,7 @@
 // api.ts
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import emitter from '@/lib/NavigationEmmiter';
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
@@ -9,16 +9,16 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 
 interface RefreshResponse {
   access: string;
-  refresh?: string;
+  refresh_token?: string;
 }
 
 const api = axios.create({
-  baseURL: 'http://192.168.116.101:8000', // Using the IP from the error log
+  baseURL: 'http://192.168.116.101:8000',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-  timeout: 10000, // 10 second timeout
+  timeout: 10000,
 });
 
 // Add request logging
@@ -77,42 +77,19 @@ api.interceptors.response.use(
   async (error: AxiosError<any>) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
 
-    // Check for token expiration (adjust condition as per your backend)
+    // Check for token expiration or blacklist
     if (
       error.response?.status === 401 &&
-      error.response.data?.code === 'token_not_valid' &&
-      !originalRequest._retry
+      (error.response.data?.code === 'token_not_valid' || error.response.data?.detail === 'Token is blacklisted')
     ) {
-      originalRequest._retry = true;
-      try {
-        const refreshToken = await AsyncStorage.getItem('refreshToken');
-        if (refreshToken) {
-          const response = await api.post<RefreshResponse>('/token/refresh', {
-            refresh: refreshToken,
-          });
-          const newAccessToken = response.data.access;
-          console.log('New Access Token:', newAccessToken);
-          await AsyncStorage.setItem('authToken', newAccessToken);
-          if (response.data.refresh) {
-            await AsyncStorage.setItem('refreshToken', response.data.refresh);
-          }
-          api.defaults.headers['Authorization'] = `Bearer ${newAccessToken}`;
-          originalRequest.headers = originalRequest.headers || {};
-          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-          return api(originalRequest);
-        }
-      } catch (refreshError) {
-        // Emit navigation event for sign-up on refresh failure
-        // emitter.emit('navigateSignUp');
-        return Promise.reject(refreshError);
-      }
-    }
-
-    // For any other 401 errors, clear tokens and navigate to sign-up
-    if (error.response?.status === 401) {
+      // Clear tokens and redirect to sign-up
       await AsyncStorage.removeItem('authToken');
       await AsyncStorage.removeItem('refreshToken');
-    //   emitter.emit('navigateSignUp');
+      
+      // If we're not already on the sign-up page, emit navigation event
+      if (!originalRequest.url?.includes('/sign-up')) {
+        emitter.emit('navigateSignUp');
+      }
     }
 
     return Promise.reject(error);

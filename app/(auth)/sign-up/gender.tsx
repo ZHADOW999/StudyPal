@@ -24,7 +24,7 @@ const Gender = () => {
   }
 
   return (
-    <SafeAreaView className="bg-studyYellow-100 h-screen px-7">
+    <View className="bg-studyYellow-100 h-screen px-7">
       <View className='mt-10'>      
         <ProgressBar currentStep={3} totalSteps={4}  />
       </View>
@@ -70,7 +70,7 @@ const Gender = () => {
           <Button text='Next' onPress={handleNext} />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

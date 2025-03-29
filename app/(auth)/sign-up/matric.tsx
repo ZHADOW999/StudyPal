@@ -30,7 +30,7 @@ const Matric = () => {
   }
   const router = useRouter()
   return (
-    <SafeAreaView className='bg-studyYellow-100 h-full px-7'>
+    <View className='bg-studyYellow-100 h-full px-7'>
       <TouchableOpacity onPress={()=> router.back()} className='mt-10'>
 
         < Icon name="chevron-left" size={24} color="black" />
@@ -73,7 +73,7 @@ const Matric = () => {
           <Button text={'Next'} onPress={handleNext} />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

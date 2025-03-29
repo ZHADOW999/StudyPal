@@ -10,7 +10,7 @@ import api from '@/api/api.config'
 
 const Login = () => {
   const router = useRouter()
-  const { setAuthenticated } = useAuthStore()
+  const { setAuthenticated,setIsLoading } = useAuthStore()
   const [studentId, setStudentId] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -29,7 +29,11 @@ const Login = () => {
 
       if (response.data?.access_token) {
         await AsyncStorage.setItem('authToken', response.data.access_token)
+        if (response.data.refresh_token) {
+          await AsyncStorage.setItem('refreshToken', response.data.refresh_token)
+        }
         setAuthenticated(true)
+        setIsLoading(false)
         router.push('/')
       }
     } catch (error) {
@@ -41,7 +45,7 @@ const Login = () => {
   }
 
   return (
-    <SafeAreaView className='bg-studyYellow-100 h-full px-7'>
+    <View className='bg-studyYellow-100 h-full px-7'>
       <TouchableOpacity onPress={() => router.back()} className='mt-10'>
         <Icon name="chevron-left" size={24} color="black" />
       </TouchableOpacity>
@@ -77,7 +81,7 @@ const Login = () => {
           />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
